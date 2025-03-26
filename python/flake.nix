@@ -38,13 +38,22 @@
         "aarch64-darwin"
       ];
       forAllSystems = lib.genAttrs supportedSystems;
-      pkgsForSystem = system: nixpkgs.legacyPackages.${system};
+      pkgsFor = forAllSystems (
+        system:
+        import nixpkgs {
+          inherit system;
+          # overlays = overlays;
+          config = {
+            allowUnfree = true;
+          };
+        }
+      );
 
       # Function to create Python environment for each system
       pythonEnvFor =
         system:
         let
-          pkgs = pkgsForSystem system;
+          pkgs = pkgsFor.${system};
           python = pkgs.python312;
 
           # Load workspace configuration from current directory

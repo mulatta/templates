@@ -8,6 +8,10 @@
           path = ./python;
           description = "Python template using uv2nix";
         };
+        pixi = {
+          path = ./pixi;
+          description = "pixi template";
+        };
       };
     };
 }
