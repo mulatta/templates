@@ -1,0 +1,19 @@
+# list justfile recipes
+default:
+    @just --list
+
+# format code
+@fmt:
+    ruff format --quiet .
+    ruff check --quiet --fix .
+
+# switch shell type
+@shell-switch shell_type:
+    echo 'export SHELL_TYPE="{{shell_type}}"' > .envrc.shell
+    direnv reload
+
+@shell-layer shell_type:
+    direnv reload
+
+@shell-list:
+    nix flake show 2>/dev/null | jq '.devShells'

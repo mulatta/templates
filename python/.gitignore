@@ -1,2 +1,43 @@
-.envrc.cache
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# macOS generated
 .DS_Store
+
+# APIs
+.env
+
+# data
+data/
+
+# direnv
+.direnv
+.envrc.shell
+
+# ruff
+.ruff_cache
+
+# private keys
+.ssh/
+*ed_25519
+*.pem
+*.key
+id_rsa
+id_dsa
+*.ppk
+
+# secrets
+secrets/
+secrets.yaml
+
+
+# logs
+*.log

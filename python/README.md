@@ -1,41 +1,31 @@
-# Project Name
+# Project
 
-## Directory Structure
+# Guide to Enter Development Environment
 
-```
-    project-name/
-  ├── .git/
-  ├── .gitignore
-  ├── .envrc                   # direnv configuration
-  ├── README.md
-  ├── LICENSE
-  ├── pyproject.toml           # project configuration file
-  ├── flake.nix                # Nix configurations
-  ├── flake.lock               # Nix dependencies lock file
-  ├── src/                     # source codes
-  │   └── package_name/        # package name directory
-  │       ├── __init__.py      # package declaration script
-  │       ├── main.py          # core function module
-  │       └── module1.py       # function module 1
-  ├── tests/                   # test code
-  │   ├── __init__.py
-  │   ├── test_main.py
-  │   └── test_module1.py
-  ├── docs/                    # Documentations
-  │   └── index.md
-  └── .venv/                   # virtual environment for python
-```
+## Primary Dependency
 
-## Usage
+In this project, we highly recommend you to use `nix`.
+With Nix, you can develop reproducible, declarative and reliable build ecosystem.
 
-### Development Environments
+## General Workflow
 
-There are 2 types of python shell in nix dev-envs: `impure` shell and `uv2nix` shell.
-For scalability and integration, both UV-based and Nix-based Python environments are supported.
-In the Nix-python environment, dependencies fixed by uv will be locked into nix by uv2nixl.
+At the initial status, use `impure shell` with `uv` to quickly add dependencies and packages for building/development.
+Once we reach a stable phase, fix the build dependencies using `nix` in the `impure shell` to implement reproducible packages.
 
-### Direnv configuration
+## DevShells
 
-For switching shell easily, direnv support `switch_shell` function
-since direnv does not directly support exporting function in `.envrc`, you should add `export_func` in direnvrc file.
-switch_shell function scripts
+In this project, we provide 2 types of devshells, pure & impure shell.
+Those shells give use encapsulated, reproducible development environments.
+
+### Impure Shell (default shell)
+
+In Impure shell, every python packages are managed by `uv` installed in nix devshell.
+
+To enter impure shell, use `nix develop .#impure` in root directory.
+Or, if you already in another shell and have just in your shell env, you can also use `just switch impure`.
+
+You can use `uv add <packge name>` to add some python packages in your virtual environment.
+
+### Pure shell (uv2nix shell)
+
+In pure shell, every project dependencies are fixed by nix.

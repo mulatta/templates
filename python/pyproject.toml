@@ -1,0 +1,17 @@
+[project]
+name = "project_name"
+version = "0.0.1"
+description = "project description"
+readme = "README.md"
+requires-python = ">=3.12"
+
+authors = [{ name = "mulatta" }]
+
+maintainers = [
+  { name = "Seungwon Lee", email = "67085791+mulatta@users.noreply.github.com" },
+]
+
+dependencies = []
+
+[project.urls]
+Repository = "https://github.com/mulatta"
