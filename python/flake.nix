@@ -141,23 +141,30 @@
                 echo ""
                 echo "Entered impure shell"
                 echo ""
-                source .venv/bin/activate
+
+                if [ -f .venv/bin/activate ]; then
+                  source .venv/bin/activate
+                fi
 
                 # Undo dependency propagation by nixpkgs.
                 unset PYTHONPATH
 
-                # Get repository root using git
-                export REPO_ROOT=$(git rev-parse --show-toplevel)
+                if git rev-parse --show-toplevel >/dev/null 2>&1; then
+                  export REPO_ROOT=$(git rev-parse --show-toplevel)
+                else
+                  export REPO_ROOT=$PWD
+                  echo "Warning: Not in a git repository. Using current directory."
+                fi
               '';
             };
         in
         {
 
-          # impure shell uses Python 3.12
-          impure = mkImpureShell pkgs.python312;
+          # set default shell as impure shell uses Python 3.12
+          default = mkImpureShell pkgs.python312;
 
           # uv2nix managed shells for different Python versions
-          default = mkUv2nixShell (
+          pure = mkUv2nixShell (
             pkgs.packageDevEnv312.overrideAttrs (old: {
               name = "package-uv2nix-py312";
             })
