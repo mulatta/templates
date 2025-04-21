@@ -49,13 +49,8 @@
       # Common development tools
       commonDeps =
         system: with pkgsFor.${system}; [
+          # Add common dependencies
           just
-          edirect
-          seqtk
-          clustal-omega
-          cd-hit
-          blast-bin
-          seqkit
         ];
 
       preCommitDeps =
