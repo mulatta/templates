@@ -83,7 +83,4 @@ in
   # Add development environments for various Python versions
   package312 = mkEnv pkgs.python312;
   packageDevEnv312 = mkDevEnv pkgs.python312;
-
-  # Provide the uv executable
-  uv = uv2nix.packages.${pkgs.system}.uv-bin;
 }

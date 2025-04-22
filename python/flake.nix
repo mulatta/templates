@@ -51,6 +51,7 @@
         system: with pkgsFor.${system}; [
           # Add common dependencies
           just
+          uv
         ];
 
       preCommitDeps =
